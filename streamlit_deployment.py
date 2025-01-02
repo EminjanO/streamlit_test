@@ -3,13 +3,19 @@ import streamlit as st
 import openai
 import pinecone
 
+st.set_page_config(
+    page_title="My Streamlit App",
+    page_icon="🌟",
+    layout="wide",
+)
+
 from openai import OpenAI
 
-# Check for secrets
-if "general" not in st.secrets or "OPENAI_API_KEY" not in st.secrets["general"]:
-    st.error("OPENAI_API_KEY is not properly set in secrets.")
-else:
-    st.success("API key found.")
+# # Check for secrets
+# if "general" not in st.secrets or "OPENAI_API_KEY" not in st.secrets["general"]:
+#     st.error("OPENAI_API_KEY is not properly set in secrets.")
+# else:
+#     st.success("API key found.")
 
 openai_api_key = st.secrets["general"]["OPENAI_API_KEY"]# os.getenv("OPENAI_API_KEY")
 
@@ -28,8 +34,6 @@ if not pc_api_key:
 pc = Pinecone(api_key=pc_api_key)
 index = pc.Index("movie-recommendation")
 
-
-st.set_page_config(layout="wide")
 
 st.title('OpenAI API Webapp')
 
